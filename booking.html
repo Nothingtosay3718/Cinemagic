@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Booking Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+            color: white;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .booking-header {
+            text-align: center;
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #ff7e5f, #feb47b);
+            color: white;
+        }
+
+        .booking-header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+        }
+
+        .booking-header p {
+            font-size: 1.3rem;
+            margin-top: 1rem;
+        }
+
+        .booking-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin: 2rem auto;
+            padding: 2rem;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .booking-form label {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .booking-form select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 1rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            background: #203a43;
+            color: white;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50; 
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            position: absolute; 
+            top: 20px;
+            left: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #45a049; 
+        }
+
+        .btn-submit {
+            padding: 10px 20px;
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            border: none;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: transform 0.2s ease;
+        }
+
+        .btn-submit:hover {
+            transform: scale(1.05);
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            padding: 20px;
+            background: #1b2735;
+            color: #fff;
+            border: 2px solid #00d4ff;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            text-align: center;
+            z-index: 1000;
+        }
+
+        .popup h2 {
+            margin-top: 0;
+            color: #00d4ff;
+        }
+
+        .popup button {
+            margin-top: 15px;
+            padding: 8px 15px;
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: transform 0.2s ease;
+        }
+
+        .popup button:hover {
+            transform: scale(1.05);
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background: #203a43;
+            color: white;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-button">Back to Home</a>
+    <header class="booking-header">
+        <h1>Book Your Tickets</h1>
+        <p>Choose your favorite movie and secure your seats now!</p>
+    </header>
+
+    <section class="booking-section">
+        <form class="booking-form" id="bookingForm">
+            <label for="movie">Select Movie:</label>
+            <select id="movie" name="movie">
+                <option value="movie1">Pushpa 2 - The Rule</option>
+                <option value="movie2">Lucky Bashkar</option>
+                <option value="movie3">Bagheraa</option>
+            </select>
+            <button type="button" class="btn-submit" id="bookNowBtn">Book Now</button>
+        </form>
+    </section>
+
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="popup">
+        <h2>Booking Confirmed!</h2>
+        <p>Your movie has been successfully booked.</p>
+        <p>Click below to view your booking:</p>
+        <a id="movieLink" href="#" target="_blank" style="color: #00d4ff; font-weight: bold;">View Movie Details</a>
+        <button id="closePopup">Close</button>
+    </div>
+
+    <script>
+        const bookNowBtn = document.getElementById('bookNowBtn');
+        const popup = document.getElementById('popup');
+        const overlay = document.getElementById('overlay');
+        const closePopup = document.getElementById('closePopup');
+        const movieSelect = document.getElementById('movie');
+        const movieLink = document.getElementById('movieLink');
+
+        // Function to generate the movie link
+        function generateMovieLink(movieId) {
+            let link = '';
+            switch(movieId) {
+                case 'movie1':
+                    link = 'https://hubdrive.tel/file/2051742735'; // Replace with your movie URL
+                    break;
+                case 'movie2':
+                    link = 'https://hubdrive.tel/file/4713149555'; // Replace with your movie URL
+                    break;
+                case 'movie3':
+                    link = 'https://hubdrive.tel/file/3413263522'; // Replace with your movie URL
+                    break;
+                default:
+                    link = '#';
+            }
+            return link;
+        }
+
+        bookNowBtn.addEventListener('click', function() {
+            const selectedMovie = movieSelect.value;
+            const movieUrl = generateMovieLink(selectedMovie);
+            movieLink.href = movieUrl; // Set the link to the popup
+            popup.style.display = 'block';
+            overlay.style.display = 'block';
+        });
+
+        closePopup.addEventListener('click', function() {
+            popup.style.display = 'none';
+            overlay.style.display = 'none';
+        });
+
+        overlay.addEventListener('click', function() {
+            popup.style.display = 'none';
+            overlay.style.display = 'none';
+        });
+    </script>
+
+    <footer>
+        <p>Designed and Coded By Bhabishaya Regmi</p>
+    </footer>
+</body>
+</html>

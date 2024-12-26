@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CineMagic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        header {
+            position: relative;
+            text-align: center;
+            padding: 2rem 0;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Welcome to the Ultimate Movie Experience</h1>
+        <p>Immerse yourself in luxury and world-class entertainment</p>
+    </header>
+
+    <div class="container">
+        <div class="movie-card">
+            <img src="movie1.jpg" alt="Movie Poster">
+            <div class="info">
+                <h3>Puspha 2-The Rule</h3>
+                <p>Experience the thrill, the drama, and the magic of cinema like never before.</p>
+                <a href="booking.html" class="primary-button">Book Now</a>
+            </div>
+        </div>
+        
+        <div class="movie-card">
+            <img src="movie2.jpg" alt="Movie Poster">
+            <div class="info">
+                <h3>Lucky Bashkar</h3>
+                <p>Experience the thrill, the drama, and the magic of cinema like never before.</p>
+                <a href="booking.html" class="primary-button">Book Now</a>
+            </div>
+        </div>
+
+        <div class="movie-card">
+            <img src="movie3.jpg" alt="Movie Poster">
+            <div class="info">
+                <h3>Bagheraa</h3>
+                <p>Catch the latest blockbusters in our state-of-the-art theater.</p>
+                <a href="booking.html" class="primary-button">Book Now</a>
+            </div>
+    </div>
+
+    <section class="section" id="about">
+        <h2>About Us</h2>
+        <p>We provide the best cinematic experience with state-of-the-art technology and luxurious seating. Discover the magic of movies like never before.</p>
+    </section>
+
+    <section class="section" id="booking">
+        <h2>Book Your Tickets</h2>
+        <p>Don’t miss out on the latest blockbusters. Book your tickets online now and enjoy a seamless experience!</p>
+        <a href="booking.html" class="primary-button">Book Now</a>
+    </section>
+
+    <section class="section" id="subscription">
+        <h2>For More Movies</h2>
+        <p>Stay updated with the latest movies, offers, and events. Subscribe now!</p>
+        <form class="subscription-form">
+            <input type="email" placeholder="Enter your email" required>
+            <button 
+                class="primary-button" 
+                type="button" 
+                onclick="openEmail()"
+            >
+                Subscribe
+            </button>
+        </form>
+    </section>
+    
+    <script>
+        function openEmail() {
+            const emailField = document.querySelector('.subscription-form input[type="email"]');
+            const email = emailField.value;
+            if (email) {
+                const subject = encodeURIComponent('Subscription Request');
+                const body = encodeURIComponent('Please subscribe me to updates.');
+                window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+            } else {
+                alert('Please enter your email before subscribing.');
+            }
+        }
+    </script>
+    
+
+    <footer>
+        <p>&copy;Designed and Coded By Bhabishaya Regmi</p>
+    </footer>
+</body>
+</html>
